@@ -1,6 +1,8 @@
 package main
 
 import (
+	"awesome/model"
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -17,9 +19,13 @@ func main() {
 	defer connection.Close()
 
 	count := 0
+	pl := &model.Payload{
+		Data: "Hello World",
+	}
 	for {
-		data := fmt.Sprintf("Hello World, count is %v", count)
-		reply, err := connection.Request("intros", []byte(data), 500 * time.Millisecond)
+		pl.Count = count
+		data, _ := json.Marshal(pl)
+		reply, err := connection.Request("intros", []byte(data), 500*time.Millisecond)
 		time.Sleep(1 * time.Second)
 		if err != nil {
 			log.Printf("error sending message count = %v, err: %v", count, err)
