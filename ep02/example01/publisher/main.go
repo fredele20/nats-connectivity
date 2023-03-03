@@ -18,9 +18,9 @@ func main() {
 
 	count := 0
 	for {
-		count++
 		connection.Publish("intros", []byte("Hello World!"))
-		time.Sleep(1 * time.Second)
+		count++
 		fmt.Printf("sent message %v", count)
+		time.Sleep(1 * time.Second)
 	}
 }
