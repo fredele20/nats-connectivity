@@ -28,10 +28,13 @@ func main() {
 		reply, err := connection.Request("intros", []byte(data), 500*time.Millisecond)
 		time.Sleep(1 * time.Second)
 		if err != nil {
-			log.Printf("error sending message count = %v, err: %v", count, err)
+			log.Printf("error sending message count = %v, err: %v\n", count, err)
 			continue
 		}
 		count++
-		fmt.Printf("sent message %v, got reply %v", count, string(reply.Data))
+		pl := &model.Payload{data, count}
+		json.Unmarshal(reply.Data, pl)
+		fmt.Println()
+		fmt.Printf("sent message %v, got reply %v\n", count, string(reply.Data))
 	}
 }

@@ -1,6 +1,6 @@
 module awesome
 
-go 1.20
+go 1.19
 
 require github.com/nats-io/nats.go v1.24.0
 

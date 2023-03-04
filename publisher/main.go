@@ -20,7 +20,7 @@ func main() {
 	for {
 		connection.Publish("intros", []byte("Hello World!"))
 		count++
-		fmt.Printf("sent message %v", count)
+		fmt.Printf("sent message %v\n", count)
 		time.Sleep(1 * time.Second)
 	}
 }

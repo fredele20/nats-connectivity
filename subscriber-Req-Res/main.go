@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesome/model"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -20,7 +21,7 @@ func main() {
 	connection.Subscribe("intros", func(msg *nats.Msg) {
 		pl := &model.Payload{}
 		json.Unmarshal(msg.Data, pl)
-		replyData := fmt.Sprintf("ack message # %v", pl.Count)
+		replyData := fmt.Sprintf("ack message # %v", pl)
 		msg.Respond([]byte(replyData))
 		fmt.Printf("I got a message: %s\n", pl.Data)
 	})
